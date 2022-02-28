@@ -1,11 +1,15 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "P6 de Vincent Martins",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Vincent Martins",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "save": "^2.4.0"
+  }
 }
