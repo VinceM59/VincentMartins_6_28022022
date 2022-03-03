@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
+const sauceRoutes = require("./routes/sauce");
+
 mongoose
   .connect(
     "mongodb+srv://Vince:baba@cluster0.thdjl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
@@ -25,6 +27,8 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+
+app.use("/api/sauce", sauceRoutes);
 
 module.exports = app;
 
