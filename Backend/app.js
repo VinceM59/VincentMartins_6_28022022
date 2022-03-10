@@ -5,9 +5,22 @@ const path = require("path");
 const sauceRoutes = require("./routes/sauce");
 const userRoutes = require("./routes/user");
 
+var username = "Vince";
+var password = "baba";
+var host = "cluster0.thdjl.mongodb.net";
+var db = "p6";
+
 mongoose
   .connect(
-    "mongodb+srv://Vince:baba@cluster0.thdjl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "mongodb+srv://" +
+      username +
+      ":" +
+      password +
+      "@" +
+      host +
+      "/" +
+      db +
+      "?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
@@ -32,26 +45,7 @@ app.use(express.json());
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 
-app.use("/api/sauce", sauceRoutes);
+app.use("/api/sauces", sauceRoutes);
 app.use("/api/auth", userRoutes);
 
 module.exports = app;
-
-// app.use((req, res, next) => {
-//   console.log("Requête reçue !");
-//   next();
-// });
-
-// app.use((req, res, next) => {
-//   res.status(201);
-//   next();
-// });
-
-// app.use((req, res, next) => {
-//   res.json({ message: "Votre requête a bien été reçue !" });
-//   next();
-// });
-
-// app.use((req, res, next) => {
-//   console.log("Réponse envoyée avec succès !");
-// });
