@@ -1,3 +1,5 @@
+//Création du schéma de création compte client.
+
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 

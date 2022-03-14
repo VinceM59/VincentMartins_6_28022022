@@ -1,15 +1,19 @@
+//Importation de Multer.
 const multer = require("multer");
 
+//Dictionnaire des formats d'images.
 const MIME_TYPES = {
   "image/jpg": "jpg",
   "image/jpeg": "jpg",
   "image/png": "png",
 };
 
+//Indication de la destination des images.
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, "images");
   },
+  //Modification du nom d'origine.
   filename: (req, file, callback) => {
     const extension = MIME_TYPES[file.mimetype];
     const name = file.originalname.split(extension).join("_");

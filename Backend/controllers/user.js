@@ -1,8 +1,10 @@
+//Création modules pour le cryptage et la sécurité des données
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
 
+//Création du compte client avec cryptage.
 exports.signup = (req, res, next) => {
   bcrypt
     .hash(req.body.password, 10)
@@ -19,6 +21,7 @@ exports.signup = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
+//Connexion compte client à l'aide du Token.
 exports.login = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
