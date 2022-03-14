@@ -99,7 +99,7 @@ exports.getAllSauce = (req, res, next) => {
 };
 
 //Création des likes et dislikes pour les sauces.
-exports.likeSauce = (req, res, next) => {
+exports.likeSauce = (req, res) => {
   if (req.body.like === 1) {
     //Ajout du like.
     Sauce.updateOne(
