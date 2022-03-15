@@ -1,11 +1,44 @@
 //Création modules pour le cryptage et la sécurité des données
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const passwordValidator = require("password-validator");
+const emailValidator = require("email-validator");
 
 const User = require("../models/user");
 
+//Configuration modèle du password.
+const schema = new passwordValidator();
+schema
+  .is()
+  .min(3)
+  .is()
+  .max(50)
+  .has()
+  .uppercase()
+  .has()
+  .lowercase()
+  .has()
+  .digits(1)
+  .has()
+  .not()
+  .spaces();
+
 //Création du compte client avec cryptage.
 exports.signup = (req, res, next) => {
+  if (!emailValidator.validate(req.body.email)) {
+    //si l'email n'est pas valide alors.
+    return res
+      .status(401)
+      .json({ message: "Veuillez entrer une adresse email valide" });
+  }
+
+  if (!schema.validate(req.body.password)) {
+    //Si le password n'est pas valide au schema.
+    return res.status(401).json({
+      message:
+        "Le mot de passe doit avoir une longueur de 3 a 50 caractères avec au moins un chiffre, une minuscule, une majuscule et ne possédant pas d'espace !!!",
+    });
+  }
   bcrypt
     .hash(req.body.password, 10)
     .then((hash) => {
