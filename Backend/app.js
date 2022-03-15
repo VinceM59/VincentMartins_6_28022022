@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
+const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 
 const sauceRoutes = require("./routes/sauce");
@@ -29,6 +30,9 @@ mongoose
 
 const app = express();
 
+//Permet de protéger l'application de certaines vulnérabilités.
+app.use(helmet({ crossOriginResourcePolicy: false }));
+//Permet de nettoyer les données de l'utilisateur.
 app.use(mongoSanitize());
 
 app.use((req, res, next) => {
