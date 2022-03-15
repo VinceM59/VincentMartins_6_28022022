@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
-const helmet = require("helmet");
 
 const sauceRoutes = require("./routes/sauce");
 const userRoutes = require("./routes/user");
@@ -28,9 +27,6 @@ mongoose
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 const app = express();
-
-//Helmet pour protéger de certaines vulnérabilités
-app.use(helmet());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
